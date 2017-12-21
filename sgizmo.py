@@ -172,6 +172,9 @@ def get_campaign_email(api_token, survey_id, campaign_id, email_id, domain=DOMAI
 def make_url(api_token, domain=DOMAIN, version=VERSION, obj='survey',
              obj_id='', subobj1 = '', subobj1_id='', subobj2='', subobj2_id='', params=PARAMS):
 
+
+
+
     base_url = _HTTP + domain + '.' + _SITE + '/v' + version + '/'
     if api_token[0] == '?':
         api_token = api_token[1:]
@@ -198,6 +201,9 @@ def make_url(api_token, domain=DOMAIN, version=VERSION, obj='survey',
     else:
         print("No endpoints. Returning None")
         return None
+    if domain == 'restapieu':
+        domain = 'restapi'
+        base_url = base_url.replace("surveygizmo.com", "surveygizmo.eu")
 
     url = base_url + endpoints + '/?'
 
@@ -212,6 +218,8 @@ def make_url(api_token, domain=DOMAIN, version=VERSION, obj='survey',
     print("Parameters", param_str)
 
     url = url + param_str
+
+
     print("URL:", url)
 
     return url
