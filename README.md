@@ -15,6 +15,7 @@ SurveyGizmo's API has 3 domains:
 'restapica' (Canadian users/account holders)
 'restapieu' (EU users/account holders)
 API calls will return an authentication error if you are using the incorrect domain (i.e., a domain different from the one in which your user account is registered). The domain can be changed by passing one of the strings above as the domain parameter in any of the get functions. The default domain is US ('restapi').
+**Your API token should be in the format: 'api_token=[x]&api_token_secret=[y]'**
 
 Available functions:
 ```
