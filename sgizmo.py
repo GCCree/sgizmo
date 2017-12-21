@@ -4,15 +4,15 @@ from time import sleep
 from sgizmo import *
 import pandas as pd
 
-_HTTP = "https://restapi"
+_HTTP = "https://"
 _SITE = "surveygizmo.com"
-DOMAIN = 'ca'
+DOMAIN = 'restapica'
 VERSION = '5'
 PARAMS = {"resultsperpage": 500,
           "page": 1}
 
 
-def _get_data(url, attempts=10, wait_sec=3):
+def _get_data(url, attempts=10, wait_sec=3, domain=DOMAIN):
 
     attempt_count = 0
     for i in range(0, attempts):
@@ -32,7 +32,7 @@ def _get_data(url, attempts=10, wait_sec=3):
             sleep(wait_sec)
 
 
-def _multi_get_data(url, api_token, obj_id='', subobj1=''):
+def _multi_get_data(url, api_token, obj_id='', subobj1='', domain=DOMAIN):
 
     params = PARAMS
     output_list = []
@@ -43,41 +43,41 @@ def _multi_get_data(url, api_token, obj_id='', subobj1=''):
         output_list.append(output)
         for i in range(2, output["total_pages"] + 1):
             params["page"] = i
-            url = make_url(api_token, obj_id=obj_id, subobj1=subobj1, params=params)
+            url = make_url(api_token, obj_id=obj_id, subobj1=subobj1, params=params, domain=domain)
             output = _get_data(url)
             output_list.append(output)
     return output_list
 
 
-def get_survey_list(api_token):
+def get_survey_list(api_token, domain=DOMAIN):
 
-    url = make_url(api_token)
+    url = make_url(api_token, domain=domain)
     data = _get_data(url)
     surveys = data["data"]
     df = pd.DataFrame(surveys)
     return df
 
 
-def get_survey(api_token, survey_id):
+def get_survey(api_token, survey_id, domain=DOMAIN):
 
-    url = make_url(api_token, obj_id=survey_id)
+    url = make_url(api_token, obj_id=survey_id, domain=domain)
     data = _get_data(url)
     survey = data["data"]
     return survey
 
 
-def get_questions(api_token, survey_id):
+def get_questions(api_token, survey_id, domain=DOMAIN):
 
-    url = make_url(api_token, obj_id=survey_id, subobj1="surveyquestion")
+    url = make_url(api_token, obj_id=survey_id, subobj1="surveyquestion", domain=domain)
     data = _get_data(url)
     questions = data["data"]
     return questions
 
 
-def get_question_option(api_token, survey_id, question_id):
+def get_question_option(api_token, survey_id, question_id, domain=DOMAIN):
 
     url = make_url(api_token, obj_id=survey_id, subobj1='surveyquestion',
-                   subobj1_id=question_id, subobj2='surveyoption')
+                   subobj1_id=question_id, subobj2='surveyoption', domain=domain)
     data = _get_data(url)
     option = data["data"]
     if len(option) > 0:
@@ -86,21 +86,22 @@ def get_question_option(api_token, survey_id, question_id):
     return option
 
 
-def get_all_survey_options(api_token, survey_id):
+def get_all_survey_options(api_token, survey_id, domain=DOMAIN, wait_sec=0):
 
-    questions = get_questions(api_token, survey_id)
+    questions = get_questions(api_token, survey_id, domain=domain)
     options = []
     for question in questions:
         qid = question["id"]
         option = get_question_option(api_token, survey_id, qid)
         if len(option) > 0:
             options.append(option)
+        sleep(wait_sec)
     return options
 
 
-def get_survey_responses(api_token, survey_id):
+def get_survey_responses(api_token, survey_id, domain=DOMAIN):
 
-    url = make_url(api_token, obj_id=survey_id, subobj1='surveyresponse')
+    url = make_url(api_token, obj_id=survey_id, subobj1='surveyresponse', domain=domain)
     data = _multi_get_data(url, api_token=api_token, obj_id=survey_id, subobj1='surveyresponse')
     return data
 
