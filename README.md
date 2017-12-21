@@ -1,4 +1,4 @@
-# Project Title
+# sgizmo
 
 This package was created to easily download objects from the SurveyGizmo API (version 5). It supports changing the domain for users outside the US (e.g., 'restapica' for Canadian users, instead of 'restapi').
 Uploading objects is not currently supported, but the make_url function can be easily adapted to work with POST and UPDATE api requests.
@@ -40,7 +40,7 @@ pip install sgizmo
 
 ## Authors
 
-* **Garret Cree** - [GCCree](https://github.com/GCCree)
+**Garret Cree** - [GCCree](https://github.com/GCCree)
 
 ## License
 
@@ -48,4 +48,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Mussie for all his wisdom and guidance over the development of this package [muchichi](https://github.com/muchichi)
+Mussie for all his wisdom and guidance over the development of this package ([muchichi](https://github.com/muchichi))
