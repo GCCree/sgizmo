@@ -3,6 +3,11 @@
 This package was created to easily download objects from the SurveyGizmo API (version 5). It supports changing the domain for users outside the US (e.g., 'restapica' for Canadian users, instead of 'restapi').
 Uploading objects is not currently supported, but the make_url function can be easily adapted to work with POST and UPDATE api requests.
 
+### Installing
+
+```
+pip install sgizmo
+```
 
 ## Getting Started
 SurveyGizmo's API has 3 domains:
@@ -30,13 +35,6 @@ get_campaign_emails(api_token, survey_id, campaign_id)
 ```
 
 The function get_all_survey_options makes repeated calls to the SurveyGizmo API, so pass a non-zero value to the wait_sec parameter to avoid exceeding your API call rate limits when downloading large numbers of options.
-
-### Installing
-
-```
-pip install sgizmo
-```
-
 
 ## Authors
 
