@@ -14,7 +14,7 @@ Uploading objects is not currently supported, but the **make_url** function can 
 SurveyGizmo's API has 3 domains:
 * 'restapi' (US users/account holders)
 * 'restapica' (Canadian users/account holders)
-* 'restapieu' (EU users/account holders)  **the domain for EU is actually 'restapi.surveygizmo.**eu**', but passing the string indicated will created the correct url* 
+* 'restapieu' (EU users/account holders)  **the domain for EU is actually 'restapi.surveygizmo.**eu**', but passing the string indicated will create the correct url* 
 
 API calls will return an authentication error if you are using the incorrect domain (i.e., a domain different from the one in which your user account is registered). The domain can be changed by passing one of the strings above as the domain parameter in any of the get functions. The default domain is US ('restapi').
 
