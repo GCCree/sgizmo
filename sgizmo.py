@@ -12,7 +12,7 @@ PARAMS = {"resultsperpage": 500,
           "page": 1}
 
 
-def _get_data(url, attempts=10, wait_sec=3, domain=DOMAIN):
+def _get_data(url, attempts=10, wait_sec=3):
 
     attempt_count = 0
     for i in range(0, attempts):
@@ -104,6 +104,69 @@ def get_survey_responses(api_token, survey_id, domain=DOMAIN):
     url = make_url(api_token, obj_id=survey_id, subobj1='surveyresponse', domain=domain)
     data = _multi_get_data(url, api_token=api_token, obj_id=survey_id, subobj1='surveyresponse')
     return data
+
+
+def get_contact_lists(api_token, domain=DOMAIN):
+
+    url = make_url(api_token, obj='contactlist', domain=domain)
+    data = _get_data(url)
+    contact_lists = data["data"]
+    return contact_lists
+
+def get_contact_list(api_token, list_id, domain=DOMAIN):
+
+    url = make_url(api_token, obj='contactlist', obj_id=list_id, domain=domain)
+    data = _get_data(url)
+    contact_list = data["data"]
+    return contact_list
+
+
+def get_contacts(api_token, contact_list_id, domain=DOMAIN):
+
+    url = make_url(api_token, obj='contactlist', obj_id=contact_list_id, subobj1='contactlistcontact')
+    data = _get_data(url)
+    contacts = data['data']
+    return contacts
+
+
+def get_contact(api_token, contact_list_id, contact_id, domain=DOMAIN):
+
+    url = make_url(api_token, obj='contactlist', obj_id=contact_list_id, subobj1='contactlistcontact', subobj1_id=contact_id, domain=domain)
+    data = _get_data(url)
+    contact = data['data']
+    return contact
+
+
+def get_campaigns(api_token, survey_id, domain=DOMAIN):
+
+    url = make_url(api_token, obj_id=survey_id, subobj1='surveycampaign', domain=domain)
+    data = _get_data(url)
+    campaigns = data['data']
+    return campaigns
+
+
+def get_campaign(api_token, survey_id, campaign_id, domain=DOMAIN):
+
+    url = make_url(api_token, obj_id=survey_id, subobj1='surveycampaign', subobj1_id=campaign_id, domain=domain)
+    data = _get_data(url)
+    campaign = data['data']
+    return campaign
+
+
+def get_campaign_emails(api_token, survey_id, campaign_id, domain=DOMAIN):
+
+    url = make_url(api_token, obj_id=survey_id, subobj1='surveycampaign', subobj1_id=campaign_id, subobj2='emailmessage', domain=domain)
+    data = _get_data(url)
+    emails = data['data']
+    return emails
+
+
+def get_campaign_email(api_token, survey_id, campaign_id, email_id, domain=DOMAIN):
+
+    url = make_url(api_token, obj_id=survey_id, subobj1='surveycampaign', subobj1_id=campaign_id, subobj2='emailmessage', subobj2_id=email_id, domain=domain)
+    data = _get_data(url)
+    email = data['data']
+    return email
 
 
 def make_url(api_token, domain=DOMAIN, version=VERSION, obj='survey',

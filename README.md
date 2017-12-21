@@ -34,17 +34,23 @@ Available functions:
     
     get_survey_responses(api_token, survey_id)
     
-    make_url(...)
-```
-Planned functions:
-```
     get_contact_lists(api_token)
+    
+    get_contact_list(api_token, list_id)
     
     get_contacts(api_token, contact_list_id)
     
+    get_contact(api_token, contact_list_id, contact_id)
+    
     get_campaigns(api_token, survey_id)
     
+    get_campaign(api_token, survey_id, campaign_id)
+    
     get_campaign_emails(api_token, survey_id, campaign_id)
+    
+    get_campaign_email(api_token, survey_id, campaign_id, email_id)
+    
+    make_url(...)
 ```
 
 The function get_all_survey_options makes repeated calls to the SurveyGizmo API, so pass a non-zero value to the wait_sec parameter to avoid exceeding your API call rate limits when downloading large numbers of options.
