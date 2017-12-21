@@ -219,7 +219,6 @@ def make_url(api_token, domain=DOMAIN, version=VERSION, obj='survey',
 
     url = url + param_str
 
-
     print("URL:", url)
 
     return url
