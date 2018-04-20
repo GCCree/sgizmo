@@ -198,11 +198,8 @@ def make_url(api_token, domain=DOMAIN, version=VERSION, obj='survey',
 
                         if subobj2_id:
                             endpoints = endpoints + '/' + str(subobj2_id)
-    else:
-        print("No endpoints. Returning None")
-        return None
+
     if domain == 'restapieu':
-        domain = 'restapi'
         base_url = base_url.replace("surveygizmo.com", "surveygizmo.eu")
 
     url = base_url + endpoints + '/?'
@@ -215,10 +212,7 @@ def make_url(api_token, domain=DOMAIN, version=VERSION, obj='survey',
         params_list.append(s)
     param_str = '&'.join(params_list)
     param_str = '&' + param_str
-    print("Parameters", param_str)
 
     url = url + param_str
-
-    print("URL:", url)
 
     return url
