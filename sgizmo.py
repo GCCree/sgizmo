@@ -168,7 +168,7 @@ def get_campaign_email(api_token, survey_id, campaign_id, email_id, domain=DOMAI
     email = data['data']
     return email
 
-def get_response_rate(api_token, survey_id, campaign_id, domain=DOMAIN):
+def get_response_info(api_token, survey_id, campaign_id, domain=DOMAIN):
     url = make_url(api_token, obj_id=survey_id, subobj1='surveycampaign', subobj1_id=campaign_id, subobj2='surveycontact', domain=domain)
     data = _get_data(url)
     return data
