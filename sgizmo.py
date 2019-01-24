@@ -18,7 +18,7 @@ def _get_data(url, attempts=10, wait_sec=3):
     for i in range(0, attempts):
         try:
             attempt_count += 1
-            output = requests.get(url)
+            output = requests.get(url, verify=False)
             if output.ok:
                 output = output.json()
                 return output
@@ -167,6 +167,11 @@ def get_campaign_email(api_token, survey_id, campaign_id, email_id, domain=DOMAI
     data = _get_data(url)
     email = data['data']
     return email
+
+def get_response_info(api_token, survey_id, campaign_id, domain=DOMAIN):
+    url = make_url(api_token, obj_id=survey_id, subobj1='surveycampaign', subobj1_id=campaign_id, subobj2='surveycontact', domain=domain)
+    data = _get_data(url)
+    return data
 
 
 def make_url(api_token, domain=DOMAIN, version=VERSION, obj='survey',
